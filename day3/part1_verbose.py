@@ -19,9 +19,13 @@ def solve(file):
     print(sum)
 
 def symbolAdjacent(schema, i, j):
+    print("NEW SEARCH")
+    print("* schema[i][j] -> " + "schema[" + str(i) + "][" + str(j) + "]= " + schema[i][j])
     for k in range(max(i - 1, 0), min(i + 2, len(schema))):
         for l in range(max(j - 1, 0), min(j + 2, len(schema[k]) - 1)):
+            print("schema[k][l] -> " + "schema[" + str(k) + "][" + str(l) + "]= " + schema[k][l])
             if re.search('[^.0-9]', schema[k][l]):
+                print("SYMBOL FOUND")
                 return True
     return False
 

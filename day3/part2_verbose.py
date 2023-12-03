@@ -13,13 +13,19 @@ def solve(file):
 
 def gearRatio(schema, i, j):
     firstMatch = ('', 0, 0, 0); secondMatch = ('', 0, 0, 0) # -> (match, start, end, k)
+    print("schema[i][j] -> " + "schema[" + str(i) + "][" + str(j) + "]= " + schema[i][j])
+    print("SEARCHING")
     for k in range(max(i - 1, 0), min(i + 2, len(schema))):
         for l in range(max(j - 1, 0), min(j + 2, len(schema[k]) - 1)):
+            print("schema[k][l] -> " + "schema[" + str(k) + "][" + str(l) + "]= " + schema[k][l])
             if re.search('[0-9]', schema[k][l]):
+                print("MATCH FOUND")
                 if firstMatch[0] == '':
                     firstMatch = getMatch(schema, k, l)
+                    print("firstMatch: " + firstMatch[0])
                 elif (firstMatch[0] != '' and secondMatch[0] == '' and isNewMatch(firstMatch, k, l)):
                     secondMatch = getMatch(schema, k, l)
+                    print("secondMatch: " + secondMatch[0])
                 elif (isNewMatch(firstMatch, k, l) and
                       isNewMatch(secondMatch, k, l)):
                     return 0

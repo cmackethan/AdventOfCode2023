@@ -18,7 +18,7 @@ def gearRatio(schema, i, j):
             if re.search('[0-9]', schema[k][l]):
                 if firstMatch[0] == '':
                     firstMatch = getMatch(schema, k, l)
-                elif firstMatch[0] != '' and secondMatch[0] == '' and isNewMatch(firstMatch, k, l):
+                elif secondMatch[0] == '' and isNewMatch(firstMatch, k, l):
                     secondMatch = getMatch(schema, k, l)
                 elif (isNewMatch(firstMatch, k, l) and
                       isNewMatch(secondMatch, k, l)):
@@ -31,7 +31,7 @@ def gearRatio(schema, i, j):
 
 def getMatch(schema, k, l):
     match = schema[k][l]; start = l; end = l + 1
-    while start > 0 and schema[k][start - 1].isdigit():
+    while schema[k][start - 1].isdigit():
         match = schema[k][start - 1] + match
         start -= 1
     while schema[k][end].isdigit():

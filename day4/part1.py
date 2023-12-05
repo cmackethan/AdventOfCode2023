@@ -14,6 +14,6 @@ def solve(file):
     print(sum)
 
 def parse(nums):
-    return set(map(int, list(filter(None, nums.split(' ')))))
+    return set(map(int, list(filter(None, nums.split()))))
 
 solve(sys.argv[1])

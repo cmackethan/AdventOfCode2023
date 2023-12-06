@@ -1,5 +1,5 @@
 import sys
-import pdb
+import math
 
 def solve(file):
     data = open(file, 'r').readlines()
@@ -14,6 +14,13 @@ def solve(file):
     conversions = []
 
     seeds = list(map(int, data[0].strip().split(': ')[1].split()))
+
+    rs = []
+    for i in range(0, len(seeds), 2):
+        # Approximation
+        for j in range(seeds[i], seeds[i] + seeds[i + 1], max(1, int(math.sqrt(seeds[i + 1]) / 25))):
+            rs.append(j)
+
     
     i = 3
     (i, seed_soil)   = buildRange(data, i, seed_soil)
@@ -24,44 +31,20 @@ def solve(file):
     (i, temp_hum)    = buildRange(data, i, temp_hum)
     (i, hum_loc)     = buildRange(data, i, hum_loc)
 
-    rs = []
-    for i in range(0, len(seeds), 2):
-        for j in range(seeds[i], seeds[i] + seeds[i + 1]):
-            rs.append(j)
-
-    rl = []
-    for line in hum_loc:
-        for j in range(line[0], line[0] + line[2]):
-            rl.append(j)
-    
-    # conversions = convert(seed_soil, seeds)
-    # conversions = convert(soil_fert, conversions)
-    # conversions = convert(fert_water, conversions)
-    # conversions = convert(water_light, conversions)
-    # conversions = convert(light_temp, conversions)
-    # conversions = convert(temp_hum, conversions)
-
-    # Iterate from the lowest location to the highest
-        # If this location maps to a seed
-            # Break
-
-    print(rl)
-    conversions = convert(hum_loc, rl)
-    print(conversions)
-    conversions = convert(temp_hum, conversions)
-    conversions = convert(light_temp, conversions)
-    conversions = convert(water_light, conversions)
-    conversions = convert(fert_water, conversions)
+    conversions = convert(seed_soil, rs)
     conversions = convert(soil_fert, conversions)
-    conversions = convert(seed_soil, conversions)
-    print(conversions)
+    conversions = convert(fert_water, conversions)
+    conversions = convert(water_light, conversions)
+    conversions = convert(light_temp, conversions)
+    conversions = convert(temp_hum, conversions)
+    conversions = convert(hum_loc, conversions)
+    print(min(conversions))
 
-# dest, src, len
 def convert(rtab, conversions):
     for (i, val) in enumerate(conversions):
         for line in rtab:
-            if val in range(line[0], line[0] + line[2]):
-                val = line[1] + val - line[0]
+            if val in range(line[1], line[1] + line[2]):
+                val = line[0] + val - line[1]
                 break
         conversions[i] = val
     return conversions

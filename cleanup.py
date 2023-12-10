@@ -10,3 +10,4 @@ for fname in ls:
         print(fpath + '/input.txt')
         os.system('git rm --cached ' + fpath + '/input.txt')
         os.system('git rm --cached ' + fpath + '/testinput.txt')
+        os.system('git rm --cached ' + fpath + '/output.txt')

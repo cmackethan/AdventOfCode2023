@@ -20,7 +20,6 @@ def solve(file):
         # Approximation
         for j in range(seeds[i], seeds[i] + seeds[i + 1], max(1, int(math.sqrt(seeds[i + 1]) / 25))):
             rs.append(j)
-
     
     i = 3
     (i, seed_soil)   = buildRange(data, i, seed_soil)

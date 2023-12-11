@@ -1,6 +1,6 @@
 import sys
 import re
-import pdb
+import time
 
 def solve(file):
     data = open(file, 'r').readlines()
@@ -28,4 +28,6 @@ def solve(file):
 
     return steps
 
+start_time = time.time()
 print(solve(sys.argv[1]))
+print("--- %s seconds ---" % (time.time() - start_time))

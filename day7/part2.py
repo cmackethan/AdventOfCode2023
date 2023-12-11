@@ -1,5 +1,4 @@
 import sys
-import pdb
 
 def solve(file):
     data = list(map(lambda x: x.split(), open(file, 'r').readlines()))

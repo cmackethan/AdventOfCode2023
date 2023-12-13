@@ -1,6 +1,5 @@
 import sys
 import time
-import functools
 
 def solve(file):
     sum = 0
